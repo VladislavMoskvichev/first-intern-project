@@ -6,8 +6,49 @@
     <title>Test project</title>
 </head>
 <body>
-<div class="container">
-    <div class="logo">
+
+<div class="wrapper">
+
+    <div class="home-wrapper">
+        <h2 class="home">Home</h2>
+        <select id="list" onchange="selectValue();">
+            <option class="list-item" value="One">One</option>
+            <option class="list-item" value="Two">Two</option>
+            <option class="list-item" value="Three">Three</option>
+            <option class="list-item" value="Four">Four</option>
+        </select>
     </div>
+
+    <div class="edit-wrapper">
+        <h2 class="home">Edit home</h2>
+        <div class="input-wrapper">
+            <input required class="text" type="text" placeholder="Enter the home name">
+            <button id="btn" onclick="changeValue()">Save</button>
+        </div>
+    </div>
+
 </div>
+
+<script>
+
+    function selectValue() {
+        let selectedValue = document.querySelector('#list').value;
+        let txt = document.querySelector('.text');
+        txt.value = selectedValue;
+    }
+
+    function changeValue() {
+        let txt = document.querySelector('.text').value;
+        let selectedValue = document.querySelector('#list');
+        let items = document.querySelectorAll('.list-item');
+        txt = txt.trim();
+
+        for (let i = 0; i < items.length ; i++) {
+            if (txt == items[i].value){
+                selectedValue.value = txt;
+            }
+        }
+    }
+
+</script>
 </body>

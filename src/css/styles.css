@@ -3,18 +3,49 @@ body {
     margin: 0;
 }
 
-.logo {
-    width: 150px;
-    height: 150px;
-    background-image: url("../assets/logo.jpeg");
-    background-size: 100%;
+h2 {
+    font-family: Arial, sans-serif;
+    padding-bottom: 5px;
 }
 
-.container {
-    min-height: 100vh;
-    min-width: 100vw;
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    margin: 20px;
+}
+
+#list {
+    width: 100px;
+    padding: 4px 12px;
+    border: 1px solid dodgerblue;
+}
+
+.edit-wrapper {
+    margin-top: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+}
+
+.text {
+    padding: 4px 12px;
+    border: 1px solid dodgerblue;
+    text-align: start;
+}
+
+#btn {
+    width: 50px;
+    background: #ffffff;
+    border: 1px solid dodgerblue;
+    border-left: none;
+}
+
+#btn:hover {
+    background: lavender;
 }
