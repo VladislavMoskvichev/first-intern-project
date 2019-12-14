@@ -11,11 +11,11 @@
 
     <div class="home-wrapper">
         <h2 class="home">Home</h2>
-        <select id="list" onchange="selectValue();">
-            <option class="list-item" value="One">One</option>
-            <option class="list-item" value="Two">Two</option>
-            <option class="list-item" value="Three">Three</option>
-            <option class="list-item" value="Four">Four</option>
+        <select id="list" onchange="selectValue()">
+            <option value="One">q(._.)p</option>
+            <option value="Two">text</option>
+            <option value="Three">0_0</option>
+            <option value="Four">(-_-)</option>
         </select>
     </div>
 
@@ -31,24 +31,29 @@
 
 <script>
 
-    function selectValue() {
-        let selectedValue = document.querySelector('#list').value;
-        let txt = document.querySelector('.text');
-        txt.value = selectedValue;
-    }
-
     function changeValue() {
+        let listValue = document.querySelector('#list');
         let txt = document.querySelector('.text').value;
-        let selectedValue = document.querySelector('#list');
-        let items = document.querySelectorAll('.list-item');
-        txt = txt.trim();
-
-        for (let i = 0; i < items.length ; i++) {
-            if (txt == items[i].value){
-                selectedValue.value = txt;
+        for (let i = 0; i < listValue.length ; i++) {
+            if (listValue.options[i].selected == true) {
+                listValue.options[i].text = txt;
             }
         }
-    }
+    };
+
+    function selectValue() {
+        let listValue = document.querySelector('#list');
+        let txt = document.querySelector('.text');
+        for (let i = 0; i < listValue.length ; i++) {
+            if (listValue.options[i].selected == true) {
+                txt.value = listValue.options[i].text;
+            }
+        }
+    };
 
 </script>
 </body>
+
+
+
+
