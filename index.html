@@ -35,7 +35,7 @@
         let listValue = document.querySelector('#list');
         let txt = document.querySelector('.text').value;
         for (let i = 0; i < listValue.length ; i++) {
-            if (listValue.options[i].selected == true) {
+            if (listValue.options[i].selected == true && txt != '') {
                 listValue.options[i].text = txt;
             }
         }
