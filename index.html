@@ -11,7 +11,7 @@
 
     <div class="home-wrapper">
         <h2 class="home">Home</h2>
-        <select id="list" onchange="selectValue()">
+        <select id="list">
             <option value="One">q(._.)p</option>
             <option value="Two">text</option>
             <option value="Three">0_0</option>
@@ -23,36 +23,17 @@
         <h2 class="home">Edit home</h2>
         <div class="input-wrapper">
             <input required class="text" type="text" placeholder="Enter the home name">
-            <button id="btn" onclick="changeValue()">Save</button>
+            <button id="btn">Save</button>
         </div>
     </div>
 
 </div>
 
-<script>
-
-    function changeValue() {
-        let listValue = document.querySelector('#list');
-        let txt = document.querySelector('.text').value;
-        for (let i = 0; i < listValue.length ; i++) {
-            if (listValue.options[i].selected == true && txt != '') {
-                listValue.options[i].text = txt;
-            }
-        }
-    };
-
-    function selectValue() {
-        let listValue = document.querySelector('#list');
-        let txt = document.querySelector('.text');
-        for (let i = 0; i < listValue.length ; i++) {
-            if (listValue.options[i].selected == true) {
-                txt.value = listValue.options[i].text;
-            }
-        }
-    };
-
+<script src="src/index.js">
 </script>
+
 </body>
+
 
 
 

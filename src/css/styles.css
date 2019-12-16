@@ -37,6 +37,7 @@ h2 {
     padding: 4px 12px;
     border: 1px solid dodgerblue;
     text-align: start;
+    outline: none;
 }
 
 #btn {
@@ -44,8 +45,17 @@ h2 {
     background: #ffffff;
     border: 1px solid dodgerblue;
     border-left: none;
+    outline: none;
 }
 
 #btn:hover {
     background: lavender;
+}
+
+#btn:active {
+    background: dodgerblue;
+}
+
+.error {
+    border: 1px solid red;
 }
