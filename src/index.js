@@ -23,6 +23,9 @@ listValue.addEventListener("change", function () {
     for (let i = 0; i < this.length; i++) {
         if (this.options[i].selected === true) {
             txt.value = this.options[i].text;
+            if (txt.classList.contains('error')) {
+                txt.classList.remove('error');
+            }
         }
     }
 });
