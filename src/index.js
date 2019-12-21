@@ -2,33 +2,32 @@ import {messages} from './messages';
 // Подключение css
 import './css/styles.css';
 
-const myList = document.querySelector('#list').onchange = () => {
-        let listValue = document.querySelector('#list');
-        let txt = document.querySelector('.text');
+let listValue = document.querySelector('#list'); // onchange
+let button = document.querySelector('#btn'); // onclick
+let txt = document.querySelector('.text'); // onfocus
+
+button.addEventListener("click", function () {
+    txt.value = txt.value.trim();
+    if (txt.value !== '') {
         for (let i = 0; i < listValue.length; i++) {
-            if (listValue.options[i].selected == true) {
-                txt.value = listValue.options[i].text;
+            if (listValue.options[i].selected === true) {
+                listValue.options[i].text = txt.value;
             }
         }
-    };
+    } else {
+        txt.classList.add('error');
+    }
+});
 
-const button = document.querySelector('#btn').onclick = () => {
-        let listValue = document.querySelector('#list');
-        let txt = document.querySelector('.text').value;
-        txt = txt.trim();
-        for (let i = 0; i < listValue.length; i++) {
-            if (listValue.options[i].selected == true && txt != '') {
-                listValue.options[i].text = txt;
-            }
-            else if (txt == ''){
-                document.querySelector('.text').classList.add('error');
-            }
+listValue.addEventListener("change", function () {
+    for (let i = 0; i < this.length; i++) {
+        if (this.options[i].selected === true) {
+            txt.value = this.options[i].text;
         }
-    };
+    }
+});
 
-const deleteError = document.querySelector('.text').onfocus = () => {
-    let txt =  document.querySelector('.text');
-    txt.classList.remove('error');
-};
-
+txt.addEventListener("focus", function () {
+    this.classList.remove('error');
+});
 
