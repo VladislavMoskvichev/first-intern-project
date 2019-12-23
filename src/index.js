@@ -8,9 +8,9 @@ let txt = document.querySelector('.text'); // onfocus
 
 button.addEventListener("click", function () {
     txt.value = txt.value.trim();
-    if (txt.value !== '') {
+    if (txt.value) {
         for (let i = 0; i < listValue.length; i++) {
-            if (listValue.options[i].selected === true) {
+            if (listValue.options[i].selected) {
                 listValue.options[i].text = txt.value;
             }
         }
@@ -21,7 +21,7 @@ button.addEventListener("click", function () {
 
 listValue.addEventListener("change", function () {
     for (let i = 0; i < this.length; i++) {
-        if (this.options[i].selected === true) {
+        if (this.options[i].selected) {
             txt.value = this.options[i].text;
             if (txt.classList.contains('error')) {
                 txt.classList.remove('error');
