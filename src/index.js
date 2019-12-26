@@ -53,7 +53,3 @@ addButton.addEventListener("click", function () {
 txtAdd.addEventListener("focus", function () {
     this.classList.remove('error');
 });
-
-txtAdd.addEventListener("focus", function () {
-    this.classList.remove('error');
-});
