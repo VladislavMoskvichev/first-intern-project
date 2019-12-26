@@ -29,18 +29,22 @@ h2 {
     margin-top: 20px;
 }
 
+.add-wrapper {
+    margin-top: 20px;
+}
+
 .input-wrapper {
     display: flex;
 }
 
-.text {
+.input-style {
     padding: 4px 12px;
     border: 1px solid dodgerblue;
     text-align: start;
     outline: none;
 }
 
-#btn {
+.btn-style {
     width: 50px;
     background: #ffffff;
     border: 1px solid dodgerblue;
@@ -48,13 +52,15 @@ h2 {
     outline: none;
 }
 
-#btn:hover {
+.btn-style:hover {
     background: lavender;
 }
 
-#btn:active {
+.btn-style:active {
     background: dodgerblue;
 }
+
+
 
 .error {
     border: 1px solid red;

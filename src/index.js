@@ -3,41 +3,57 @@ import {messages} from './messages';
 import './css/styles.css';
 
 let listValue = document.querySelector('#list'); // onchange
-let button = document.querySelector('#btn'); // onclick
-let txt = document.querySelector('.text'); // onfocus
+let editButton = document.querySelector('#edit-btn'); // onclick
+let addButton = document.querySelector('#add-btn'); // onclick
+let txtEdit = document.querySelector('#text-edit'); // onfocus
+let txtAdd = document.querySelector('#text-add'); // onfocus
 
-button.addEventListener("click", function () {
-    txt.value = txt.value.trim();
-    if (!txt.value) {
-        return txt.classList.add('error');
+editButton.addEventListener("click", function () {
+    txtEdit.value = txtEdit.value.trim();
+    if (!txtEdit.value) {
+        return txtEdit.classList.add('error');
     }
     for (let i = 0; i < listValue.length; i++) {
         if (listValue.options[i].selected) {
-            listValue.options[i].text = txt.value;
+            listValue.options[i].text = txtEdit.value;
         }
     }
 });
 
 listValue.addEventListener("change", function () {
 
-    if (txt.classList.contains('error')) {
-        txt.classList.remove('error');
+    if (txtEdit.classList.contains('error')) {
+        txtEdit.classList.remove('error');
     }
 
     for (let i = 0; i < this.length; i++) {
         if (this.options[i].selected) {
-            txt.value = this.options[i].text;
+            txtEdit.value = this.options[i].text;
         }
     }
 });
 
-txt.addEventListener("focus", function () {
-    this.classList.remove('error');
+txtEdit.addEventListener("focus", function () {
+   this.classList.remove('error');
 });
 
 window.onload = function () {
-    txt.value = listValue.options[listValue.selectedIndex].text;
+    txtEdit.value = listValue.options[listValue.selectedIndex].text;
 }
 
+addButton.addEventListener("click", function () {
+    txtAdd.value = txtAdd.value.trim();
+    if (!txtAdd.value) {
+        return txtAdd.classList.add('error');
+    }
+    let myOption = new Option(txtAdd.value);
+    listValue.append(myOption);
+});
 
+txtAdd.addEventListener("focus", function () {
+    this.classList.remove('error');
+});
 
+txtAdd.addEventListener("focus", function () {
+    this.classList.remove('error');
+});
