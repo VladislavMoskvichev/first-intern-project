@@ -48,6 +48,9 @@ addButton.addEventListener("click", function () {
     }
     let myOption = new Option(txtAdd.value);
     listValue.append(myOption);
+
+    txtAdd.value = null;
+
 });
 
 txtAdd.addEventListener("focus", function () {
