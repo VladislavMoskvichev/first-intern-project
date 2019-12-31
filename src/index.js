@@ -34,7 +34,7 @@ listValue.addEventListener("change", function () {
 });
 
 txtEdit.addEventListener("focus", function () {
-   this.classList.remove('error');
+    this.classList.remove('error');
 });
 
 window.onload = function () {
@@ -46,7 +46,12 @@ addButton.addEventListener("click", function () {
     if (!txtAdd.value) {
         return txtAdd.classList.add('error');
     }
-    let myOption = new Option(txtAdd.value);
+
+    const t = Array.from(listValue, value => value.text == txtAdd.value).some(value => value == true);
+    if (t) return txtAdd.classList.add('error');
+
+
+    const myOption = new Option(txtAdd.value);
     listValue.append(myOption);
 
     txtAdd.value = null;
@@ -56,3 +61,4 @@ addButton.addEventListener("click", function () {
 txtAdd.addEventListener("focus", function () {
     this.classList.remove('error');
 });
+
