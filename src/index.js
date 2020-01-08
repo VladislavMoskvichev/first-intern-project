@@ -10,14 +10,19 @@ let txtAdd = document.querySelector('#text-add'); // onfocus
 
 editButton.addEventListener("click", function () {
     txtEdit.value = txtEdit.value.trim();
+
+    const checkRepeat = Array.from(listValue).some(value => value.label == txtEdit.value);
+    if (checkRepeat) return txtEdit.classList.add('error');
+
     if (!txtEdit.value) {
         return txtEdit.classList.add('error');
     }
     for (let i = 0; i < listValue.length; i++) {
-        if (listValue.options[i].selected) {
+        if (listValue.options[i].selected && !checkRepeat) {
             listValue.options[i].text = txtEdit.value;
         }
     }
+
 });
 
 listValue.addEventListener("change", function () {
@@ -31,6 +36,7 @@ listValue.addEventListener("change", function () {
             txtEdit.value = this.options[i].text;
         }
     }
+
 });
 
 txtEdit.addEventListener("focus", function () {
@@ -47,9 +53,8 @@ addButton.addEventListener("click", function () {
         return txtAdd.classList.add('error');
     }
 
-    const t = Array.from(listValue, value => value.text == txtAdd.value).some(value => value == true);
-    if (t) return txtAdd.classList.add('error');
-
+    const checkRepeat = Array.from(listValue).some(value => value.label == txtAdd.value);
+    if (checkRepeat) return txtAdd.classList.add('error');
 
     const myOption = new Option(txtAdd.value);
     listValue.append(myOption);
