@@ -73,7 +73,6 @@ txtAdd.addEventListener("focus", function (data) {
 
 window.addEventListener("load", function () {
     const myList = JSON.parse(localStorage.getItem('myList'));
-    // const myList = ["test", 'test2']
     myList.forEach(function (item, index) {
         const opt = document.createElement("option");
         opt.label = item;
