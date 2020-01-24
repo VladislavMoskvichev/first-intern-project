@@ -2,11 +2,11 @@ import {messages} from './messages';
 // Подключение css
 import './css/styles.css';
 
-let select = document.querySelector('#list'); // onchange
-let editButton = document.querySelector('#edit-btn'); // onclick
-let addButton = document.querySelector('#add-btn'); // onclick
-let txtEdit = document.querySelector('#text-edit'); // onfocus
-let txtAdd = document.querySelector('#text-add'); // onfocus
+const select = document.querySelector('#list');
+const editButton = document.querySelector('#edit-btn');
+const addButton = document.querySelector('#add-btn');
+const txtEdit = document.querySelector('#text-edit');
+const txtAdd = document.querySelector('#text-add');
 
 function removeError(el) {
     if (el.classList.contains('error')) {
@@ -21,9 +21,7 @@ const workWithSelect = {
         const opts = Array.from(select).map(i => i.label);
         if (opts.some(value => value === txtEdit.value) || !txtEdit.value) return txtEdit.classList.add('error');
 
-        // opts[]opts
-
-        opts[select.selectedIndex] = txtEdit.value
+        opts[select.selectedIndex] = txtEdit.value;
         saveToLocalStorage(opts);
 
         for (let i = 0; i < select.length; i++) {
@@ -65,12 +63,6 @@ function saveToLocalStorage(arr) {
     localStorage.setItem('myList', JSON.stringify(arr));
 }
 
-editButton.onclick = workWithSelect.editSelect;
-select.onchange = workWithSelect.pushValueToEdit;
-txtEdit.onfocus = removeError(txtEdit);
-addButton.onclick = workWithSelect.addValueToSelect;
-txtAdd.onfocus = removeError(txtAdd);
-
 txtEdit.addEventListener("focus", function (data) {
     removeError(data.target);
 });
@@ -91,6 +83,11 @@ window.addEventListener("load", function () {
     workWithSelect.saveCurrentlyValue();
 });
 
+editButton.onclick = workWithSelect.editSelect;
+select.onchange = workWithSelect.pushValueToEdit;
+txtEdit.onfocus = removeError(txtEdit);
+addButton.onclick = workWithSelect.addValueToSelect;
+txtAdd.onfocus = removeError(txtAdd);
 
 
 
