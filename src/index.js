@@ -2,90 +2,103 @@ import {messages} from './messages';
 // Подключение css
 import './css/styles.css';
 
-let listValue = document.querySelector('#list'); // onchange
+let select = document.querySelector('#list'); // onchange
 let editButton = document.querySelector('#edit-btn'); // onclick
 let addButton = document.querySelector('#add-btn'); // onclick
 let txtEdit = document.querySelector('#text-edit'); // onfocus
 let txtAdd = document.querySelector('#text-add'); // onfocus
-let todos;
-let arr;
 
-function toLocal(){
-    todos = Array.from(listValue).map(value => value.label);
-    localStorage.setItem('todos', JSON.stringify(todos));
-    arr = localStorage.getItem('todos');
-    arr = JSON.parse(arr);
-
+function removeError(el) {
+    if (el.classList.contains('error')) {
+        el.classList.remove('error');
+    }
 }
 
-// if (localStorage.getItem('arr')) {
-//     for (let i = 0; i < arr.length; i++) {
-//         listValue.options[i].label = arr[i];
-//     }
-// }
+const workWithSelect = {
+    editSelect: function () {
+        txtEdit.value = txtEdit.value.trim();
 
+        const opts = Array.from(select).map(i => i.label);
+        if (opts.some(value => value === txtEdit.value) || !txtEdit.value) return txtEdit.classList.add('error');
 
-editButton.addEventListener("click", function () {
-    txtEdit.value = txtEdit.value.trim();
+        // opts[]opts
 
-    const isRepeat = Array.from(listValue).some(value => value.label == txtEdit.value);
-    if (isRepeat) return txtEdit.classList.add('error');
+        opts[select.selectedIndex] = txtEdit.value
+        saveToLocalStorage(opts);
 
-    if (!txtEdit.value) {
-        return txtEdit.classList.add('error');
-    }
-    for (let i = 0; i < listValue.length; i++) {
-        if (listValue.options[i].selected && !isRepeat) {
-            listValue.options[i].text = txtEdit.value;
+        for (let i = 0; i < select.length; i++) {
+            if (select.options[i].selected) {
+                select.options[i].label = txtEdit.value;
+            }
         }
-    }
-    toLocal();
-
-});
-
-listValue.addEventListener("change", function () {
-
-    if (txtEdit.classList.contains('error')) {
-        txtEdit.classList.remove('error');
-    }
-
-    for (let i = 0; i < this.length; i++) {
-        if (this.options[i].selected) {
-            txtEdit.value = this.options[i].text;
+    },
+    pushValueToEdit: function () {
+        removeError(txtEdit);
+        for (let i = 0; i < this.length; i++) {
+            if (this.options[i].selected) {
+                txtEdit.value = this.options[i].label;
+            }
         }
+    },
+    saveCurrentlyValue: function () {
+        console.log(select.options[select.selectedIndex])
+        txtEdit.value = select.options[select.selectedIndex].label;
+    },
+    addValueToSelect: function () {
+        txtAdd.value = txtAdd.value.trim();
+        if (!txtAdd.value) {
+            return txtAdd.classList.add('error');
+        }
+        const currentOpts =  Array.from(select).map(i => i.label);
+        if (currentOpts.some(value => value === txtAdd.value)) return txtAdd.classList.add('error');
+
+        const myOption = new Option(txtAdd.value);
+        saveToLocalStorage([...currentOpts, txtAdd.value]);
+
+        select.append(myOption);
+
+        txtAdd.value = null;
     }
-    toLocal();
+};
 
-});
-
-txtEdit.addEventListener("focus", function () {
-    this.classList.remove('error');
-});
-
-window.onload = function () {
-    txtEdit.value = listValue.options[listValue.selectedIndex].text;
+function saveToLocalStorage(arr) {
+    localStorage.setItem('myList', JSON.stringify(arr));
 }
 
-addButton.addEventListener("click", function () {
-    txtAdd.value = txtAdd.value.trim();
-    if (!txtAdd.value) {
-        return txtAdd.classList.add('error');
-    }
+editButton.onclick = workWithSelect.editSelect;
+select.onchange = workWithSelect.pushValueToEdit;
+txtEdit.onfocus = removeError(txtEdit);
+addButton.onclick = workWithSelect.addValueToSelect;
+txtAdd.onfocus = removeError(txtAdd);
 
-    const checkRepeat = Array.from(listValue).some(value => value.label == txtAdd.value);
-    if (checkRepeat) return txtAdd.classList.add('error');
-
-    const myOption = new Option(txtAdd.value);
-    listValue.append(myOption);
-
-    txtAdd.value = null;
-    toLocal();
-
+txtEdit.addEventListener("focus", function (data) {
+    removeError(data.target);
 });
 
-txtAdd.addEventListener("focus", function () {
-    this.classList.remove('error');
+txtAdd.addEventListener("focus", function (data) {
+    removeError(data.target);
 });
+
+window.addEventListener("load", function () {
+    const myList = JSON.parse(localStorage.getItem('myList'));
+    // const myList = ["test", 'test2']
+    myList.forEach(function (item, index) {
+        const opt = document.createElement("option");
+        opt.label = item;
+        select.append(opt);
+    });
+
+    workWithSelect.saveCurrentlyValue();
+});
+
+
+
+
+
+
+
+
+
 
 
 
