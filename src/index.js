@@ -44,17 +44,14 @@ const workWithSelect = {
     },
     addValueToSelect: function () {
         txtAdd.value = txtAdd.value.trim();
-        if (!txtAdd.value) {
-            return txtAdd.classList.add('error');
-        }
+
         const currentOpts =  Array.from(select).map(i => i.label);
-        if (currentOpts.some(value => value === txtAdd.value)) return txtAdd.classList.add('error');
+        if (currentOpts.some(value => value === txtAdd.value) || !txtAdd.value) return txtAdd.classList.add('error');
 
         const myOption = new Option(txtAdd.value);
         saveToLocalStorage([...currentOpts, txtAdd.value]);
 
         select.append(myOption);
-
         txtAdd.value = null;
     }
 };
